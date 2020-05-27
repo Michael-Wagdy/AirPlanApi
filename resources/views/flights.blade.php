@@ -62,6 +62,10 @@
     <body>
 
             <div class="content">
+ <?php 
+          
+            if($data){
+ ?>    
 
 <table class="table">
   <thead>
@@ -81,9 +85,6 @@
     </tr>
   </thead>
   <tbody>
- <?php 
- if($data){
- ?>    
  
 @for($i = 0 ; $i< count($data); $i++)
 <tr>
