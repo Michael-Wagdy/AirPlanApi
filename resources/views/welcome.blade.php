@@ -62,17 +62,26 @@
     <body>
         <div class="flex-center  d-flex justify-content position-ref full-height">
 
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             <div class="content">
             <form method="post" action="{{route('getData')}}">
                 @csrf
             <div class="input-group mb-3">
                             <div class="col">
-            <label for="from" >from</label>
-            <input type="text" name="from" id="from" value="CAI" class="form-control">
+            <label for="origin" >from</label>
+            <input type="text" name="origin" id="origin" value="CAI" class="form-control" required>
             </div>
     <div class="col">
-       <label for="to">to</label>
-       <input type="text" name="to" id="to" value="JFK" class="form-control">
+       <label for="destination">to</label>
+       <input type="text" name="destination" id="destination" value="JFK" class="form-control" required>
     </div>
 
     <div class="col">
@@ -83,7 +92,7 @@
     <div class="col">
           <label for="inputTravellers">Travellers</label>
           
-       <select  name="traveller" id="traveller" class="form-control">
+       <select  name="traveller" id="traveller" class="form-control" required>
             <option value="1">1 Travellers</option>
         </select>
     </div>
@@ -91,7 +100,7 @@
     <div class="col">
           <label for="inputType">type</label>
           
-       <select  name="class" id="type" class="form-control">
+       <select  name="class" id="type" class="form-control" required>
             <option value="Economy">Economy</option>
         </select>
     </div>

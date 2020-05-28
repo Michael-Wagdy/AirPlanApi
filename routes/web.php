@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/results','AjaxController@getData')->name('getData');
+Route::post('/results','FlightPlanController@getData')->name('getData');
 
 

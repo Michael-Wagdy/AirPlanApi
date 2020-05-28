@@ -66,11 +66,10 @@
           
             if($data){
  ?>    
-
+<h1 style='margin:5%;'> Flights </h1>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Departure Time</th>
       <th scope="col">Arrival Time</th>
       <th scope="col">Flight No. </th>
@@ -85,47 +84,38 @@
     </tr>
   </thead>
   <tbody>
- 
+
+
 @for($i = 0 ; $i< count($data); $i++)
 <tr>
 
-@foreach($data[$i]['flights'] as $item)
+@foreach($data[$i]['flights'] as $items)
+
+@for($d=0; $d < count($items);$d++)
+
+
 <tr>
-    <th scope="row">{{$i}}</th>
+      <td>{{date("m-d-Y h:i a", strtotime($items[$d]['DepartureDateTime']))}}</td>
+      <td>{{date("m-d-Y h:i a", strtotime($items[$d]['ArrivalDateTime']))}}</td>
+      <td>{{$items[$d]['FlightNumber']}}</td>
+      <td>{{floor($items[$d]['ElapsedTime']/60).':' .$items[$d]['ElapsedTime']%60}}</td>
+      <td>{{$items[$d] ['DepartureAirport']}}</td>
+      <td>{{$items[$d]['ArrivalAirport']}}</td>
+      <td>{{$items[$d]['OperatingAirline']}}</td>
+      <td>{{$items[$d]['OperatingAirlineName']}}</td>
+      <td>{{$items[$d]['DepartureAirportName']}}</td>
+      <td>{{$items[$d]['ArrivalAirportName']}}</td>
+      @if($d< count($items)-1)
+      <td>{{floor($items[$d+1]['FlightLayoverTime']/60).' Hr : ' .$items[$d+1]['FlightLayoverTime']%60 ." min"}}</td>
+              @else
+            <td> - </td>
+        @endif  
+        </tr>  
 
-
-
-      <td>{{date("m-d-Y h:i a", strtotime($item[0]['DepartureDateTime']))}}</td>
-      <td>{{date("m-d-Y h:i a", strtotime($item[0]['ArrivalDateTime']))}}</td>
-      <td>{{$item[0]['FlightNumber']}}</td>
-      <td>{{floor($item[0]['ElapsedTime']/60).':' .$item[0]['ElapsedTime']%60}}</td>
-      <td>{{$item[0]['DepartureAirport']}}</td>
-      <td>{{$item[0]['ArrivalAirport']}}</td>
-      <td>{{$item[0]['OperatingAirline']}}</td>
-      <td>{{$item[0]['OperatingAirlineName']}}</td>
-      <td>{{$item[0]['DepartureAirportName']}}</td>
-      <td>{{$item[0]['ArrivalAirportName']}}</td>
-      <td>{{floor($item[1]['FlightLayoverTime']/60).':' .$item[1]['FlightLayoverTime']%60}}</td>
-    </tr>  
-    <tr>
-    <th scope="row"></th>
-
-
-
-      <td>{{date("m-d-Y h:i a", strtotime($item[1]['DepartureDateTime']))}}</td>
-      <td>{{date("m-d-Y h:i a", strtotime($item[1]['ArrivalDateTime']))}}</td>
-      <td>{{$item[1]['FlightNumber']}}</td>
-      <td>{{floor($item[1]['ElapsedTime']/60).':' .$item[1]['ElapsedTime']%60}}</td>
-      <td>{{$item[1]['DepartureAirport']}}</td>
-      <td>{{$item[1]['ArrivalAirport']}}</td>
-      <td>{{$item[1]['OperatingAirline']}}</td>
-      <td>{{$item[1]['OperatingAirlineName']}}</td>
-      <td>{{$item[1]['DepartureAirportName']}}</td>
-      <td>{{$item[1]['ArrivalAirportName']}}</td>
-    </tr>
-
-</tr>
+@endfor 
 @endforeach 
+</tr>  
+
 @endfor
 <?php 
 }
